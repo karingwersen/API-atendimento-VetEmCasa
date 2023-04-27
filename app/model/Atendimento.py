@@ -1,12 +1,13 @@
 from marshmallow import Schema, fields
 
-class Atendimento:
-    def __init__(self, pet: str, tutor: str, veterinario: str, data: str, horario: str, type):
+class Atendimento(object):
+    def __init__(self, pet: str, tutor: str, veterinario: str, data: str, horario: str, id: str, type):
         self.pet = pet
         self.tutor = tutor
         self.veterinario = veterinario
         self.data = data
         self.horario = horario
+        self.id = id
         self.type = type
 
     def __rpr__(self):
@@ -19,4 +20,5 @@ class AtendimentoSchema(Schema):
     veterinario = fields.Str()
     data = fields.Str()
     horario = fields.Str()
+    id = fields.Str()
     type = fields.Str()
