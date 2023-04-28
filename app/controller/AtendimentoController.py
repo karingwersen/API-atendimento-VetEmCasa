@@ -1,11 +1,12 @@
 from controller.PostgreSQL import PostgreSQL
 from model.Atendimento import Atendimento
+import random
 
 class AtendimentoController:
 
     @staticmethod
     def listar_atendimentos():
-        postgresql = PostgreSQL()
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
         atendimentos_info = postgresql.listar_atendimentos()
 
         atendimentos = []
@@ -22,7 +23,7 @@ class AtendimentoController:
 
     @staticmethod
     def detalhes_atendimento(id: str):
-        postgresql = PostgreSQL()
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
         atendimento_info = postgresql.detalhes_atendimento(id)
 
         atendimento = Atendimento(pet=atendimento_info[0], tutor=atendimento_info[1], veterinario=atendimento_info[2],
@@ -32,7 +33,10 @@ class AtendimentoController:
 
     @staticmethod
     def criar_atendimento(atendimento : Atendimento):
-        postgresql = PostgreSQL()
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+        hash = random.getrandbits(128)
+        id = "%032x" % hash
+        atendimento.id = id
         resultado = postgresql.criar_atendimento(atendimento)
 
         if resultado:
