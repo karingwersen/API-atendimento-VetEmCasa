@@ -1,5 +1,5 @@
 import psycopg2
-from ..model.Atendimento import Atendimento
+from model.Atendimento import Atendimento
 
 class PostgreSQL(object):
     def __init__(self):
