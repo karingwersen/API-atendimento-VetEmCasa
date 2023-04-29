@@ -2,9 +2,22 @@ from flask import Flask, jsonify, request
 from controller.AtendimentoController import AtendimentoController
 from model.Atendimento import AtendimentoSchema, Atendimento
 from flask_cors import CORS
+from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__)
 CORS(app)
+
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+SWAGGERUI_BLUEPRINT = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Atendimento API"
+    }
+)
+
+app.register_blueprint(SWAGGERUI_BLUEPRINT, url_prefix=SWAGGER_URL)
 
 @app.route("/")
 def hello_world():
