@@ -1,7 +1,8 @@
 from marshmallow import Schema, fields
+from datetime import datetime as dt
 
 class Atendimento(object):
-    def __init__(self, pet: str, tutor: str, veterinario: str, data: str, horario: str, id: str):
+    def __init__(self, pet: str, tutor: str, veterinario: str, data: dt.date, horario: dt.time, id: str):
         self.pet = pet
         self.tutor = tutor
         self.veterinario = veterinario
@@ -17,6 +18,6 @@ class AtendimentoSchema(Schema):
     pet = fields.Str()
     tutor = fields.Str()
     veterinario = fields.Str()
-    data = fields.Str()
-    horario = fields.Str()
+    data = fields.Date()
+    horario = fields.Time()
     id = fields.Str()
