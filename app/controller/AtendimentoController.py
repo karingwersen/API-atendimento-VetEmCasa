@@ -13,8 +13,8 @@ class AtendimentoController:
 
         for atendimento_info in atendimentos_info:
             atendimento = Atendimento(pet=atendimento_info[0], tutor=atendimento_info[1],
-                                      veterinario=atendimento_info[2], data=atendimento_info[3],
-                                      horario=atendimento_info[4], id=atendimento_info[5])
+                                      veterinario=atendimento_info[2], data=atendimento_info[4],
+                                      horario=atendimento_info[5], id=atendimento_info[3])
             atendimentos.append(atendimento)
 
         return atendimentos
@@ -27,7 +27,7 @@ class AtendimentoController:
         atendimento_info = postgresql.detalhes_atendimento(id)
 
         atendimento = Atendimento(pet=atendimento_info[0], tutor=atendimento_info[1], veterinario=atendimento_info[2],
-                                 data=atendimento_info[3], horario=atendimento_info[4], id=atendimento_info[5])
+                                 data=atendimento_info[4], horario=atendimento_info[5], id=atendimento_info[3])
 
         return atendimento
 
