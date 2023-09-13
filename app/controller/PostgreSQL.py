@@ -45,6 +45,28 @@ class PostgreSQL(object):
         self.close_connection()
         return True
 
+    def apagar_atendimento(self, id: str):
+        sql_statement = "delete from atendimentos where id=%s;"
+        self.create_cursor()
+        self.cursor.execute(sql_statement, [id])
+
+        self.connection.commit()
+        self.close_cursor()
+        self.close_connection()
+        return True
+
+    def atualizar_atendimento(self, atendimento: Atendimento):
+        sql_statement = "update atendimentos set pet = %s, tutor = %s, veterinario = %s, data = %s, horario = %s where id=%s"
+        self.create_cursor()
+        self.cursor.execute(sql_statement,
+                            [atendimento.pet, atendimento.tutor, atendimento.veterinario, atendimento.data,
+                             atendimento.horario, atendimento.id])
+
+        self.connection.commit()
+        self.close_cursor()
+        self.close_connection()
+        return True
+
     def close_connection(self):
         self.connection.close()
 

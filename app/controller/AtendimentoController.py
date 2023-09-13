@@ -43,3 +43,25 @@ class AtendimentoController:
             return True
         else:
             return False
+
+    @staticmethod
+    def apagar_atendimento(id: str):
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+
+        resultado = postgresql.apagar_atendimento(id)
+
+        if resultado:
+            return True
+        else:
+            return False
+
+    @staticmethod
+    def atualizar_atendimento(atendimento: Atendimento):
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+
+        resultado = postgresql.atualizar_atendimento(atendimento)
+
+        if resultado:
+            return True
+        else:
+            return False

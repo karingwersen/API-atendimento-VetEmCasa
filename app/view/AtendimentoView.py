@@ -58,6 +58,30 @@ def criar_atendimento():
     else:
         return "atendimento não criado", 500
 
+@app.route("/api/v1/apagar_atendimento", methods = ["DELETE"])
+def apagar_atendimento():
+
+    atendimento_deletado = AtendimentoController.apagar_atendimento(request.args.get("id"))
+
+    if atendimento_deletado:
+        return "atendimento deletado", 204
+    else:
+        return "atendimento não deletado", 500
+
+@app.route("/api/v1/atualizar_atendimento", methods = ["PUT"])
+def atualizar_atendimento():
+    atendimento_request = request.json
+
+    atendimento = Atendimento(pet=atendimento_request["pet"], tutor=atendimento_request["tutor"],
+                              veterinario=atendimento_request["veterinario"], data=atendimento_request["data"],
+                              horario=atendimento_request["horario"], id=request.args.get("id"))
+
+    atendimento_atualizado = AtendimentoController.atualizar_atendimento(atendimento)
+
+    if atendimento_atualizado:
+        return "atendimento atualizado", 202
+    else:
+        return "atendimento não atualizado", 500
 
 def atendimento_view():
     app.run(host="0.0.0.0", port=5000)

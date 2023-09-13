@@ -119,6 +119,73 @@
             }
           }
       }
+    },
+    "/v1/apagar_atendimento": {
+      "delete": {
+          "description": "Deleta um atendimento",
+          "operationId": "deleteAtendimento",
+          "produces": [
+            "application/json"
+          ],
+           "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID do atendimento para apagar",
+            "required": true,
+            "type": "string"
+          }
+        ],
+          "responses": {
+            "204": {
+              "description": "atendimento deletado"
+            },
+            "default": {
+              "description": "unexpected error",
+              "schema": {
+                "$ref": "#/definitions/ErrorModel"
+              }
+            }
+          }
+      }
+    },
+    "/v1/atualizar_atendimento": {
+      "put": {
+        "description": "Atualiza um atendimento",
+        "operationId": "updateAtendimento",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "ID do atendimento para atualizar",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "atendimento",
+            "in": "body",
+            "description": "Atendimento a ser atualizado.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NewAtendimento"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "atendimento atualizado"
+          },
+          "default": {
+            "description": "unexpected error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
