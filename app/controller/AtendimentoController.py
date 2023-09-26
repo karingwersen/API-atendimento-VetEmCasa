@@ -1,12 +1,13 @@
 from controller.PostgreSQL import PostgreSQL
 from model.Atendimento import Atendimento
 import random
+from os import environ
 
 class AtendimentoController:
 
     @staticmethod
     def listar_atendimentos():
-        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password=environ["POSTGRES_PASS"], host="localhost", port="5432")
         atendimentos_info = postgresql.listar_atendimentos()
 
         atendimentos = []
@@ -23,7 +24,7 @@ class AtendimentoController:
 
     @staticmethod
     def detalhes_atendimento(id: str):
-        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password=environ["POSTGRES_PASS"], host="localhost", port="5432")
         atendimento_info = postgresql.detalhes_atendimento(id)
 
         atendimento = Atendimento(pet=atendimento_info[0], tutor=atendimento_info[1], veterinario=atendimento_info[2],
@@ -33,7 +34,7 @@ class AtendimentoController:
 
     @staticmethod
     def criar_atendimento(atendimento : Atendimento):
-        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password=environ["POSTGRES_PASS"], host="localhost", port="5432")
         hash = random.getrandbits(128)
         id = "%032x" % hash
         atendimento.id = id
@@ -46,7 +47,7 @@ class AtendimentoController:
 
     @staticmethod
     def apagar_atendimento(id: str):
-        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password=environ["POSTGRES_PASS"], host="localhost", port="5432")
 
         resultado = postgresql.apagar_atendimento(id)
 
@@ -57,7 +58,7 @@ class AtendimentoController:
 
     @staticmethod
     def atualizar_atendimento(atendimento: Atendimento):
-        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password="", host="localhost", port="5432")
+        postgresql = PostgreSQL(dbname="vetemcasa", user="postgres", password=environ["POSTGRES_PASS"], host="localhost", port="5432")
 
         resultado = postgresql.atualizar_atendimento(atendimento)
 
