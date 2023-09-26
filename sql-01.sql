@@ -1,3 +1,5 @@
+ALTER USER postgres PASSWORD 'myPassword';
+
 CREATE DATABASE vetemcasa;
 
 \c vetemcasa;
